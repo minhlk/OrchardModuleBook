@@ -1,0 +1,33 @@
+﻿@using System.Web.Mvc.Html
+@model MK.BookStore.Models.BookPart
+<fieldset>
+    <legend>Product Fields</legend>
+
+    <div class="editor-label">@Html.LabelFor(x => x.Name)</div>
+    <div class="editor-field">
+        @Html.EditorFor(x => x.Name)
+        @Html.ValidationMessageFor(x => x.Name)
+    </div>
+    <div class="hint">Enter book's name</div>
+
+    <div class="editor-label">@Html.LabelFor(x => x.Author)</div>
+    <div class="editor-field">
+        @Html.EditorFor(x => x.Author)
+        @Html.ValidationMessageFor(x => x.Author)
+    </div>
+    <div class="hint">Enter book's author name</div>
+    
+    <div class="editor-label">@Html.LabelFor(x => x.Genre)</div>
+    <div class="editor-field">
+        @Html.EditorFor(x => x.Genre)
+        @Html.ValidationMessageFor(x => x.Genre)
+    </div>
+    <div class="hint">Enter Genre</div>
+    
+    <div class="editor-label">@Html.LabelFor(x => x.Price)</div>
+    <div class="editor-field">
+        @Html.EditorFor(x => x.Price)
+        @Html.ValidationMessageFor(x => x.Price)
+    </div>
+    <div class="hint">Enter book's price</div>
+</fieldset>
