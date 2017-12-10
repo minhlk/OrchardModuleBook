@@ -113,11 +113,17 @@ namespace MK.BookStore.Services
             return Items.Sum(x => x.Quantity);
         }
 
-        private void Clear()
+        public void Clear()
         {
             ItemsInternal.Clear();
             UpdateItems();
         }
-
+        public void AddRange(IEnumerable<CartItem> items)
+        {
+            foreach (var item in items)
+            {
+                Add(item.BookId, item.Quantity);
+            }
+        }
     }
 }

@@ -5,4 +5,4 @@ Website: https://github.com/minhlk
 Version: 1.0
 OrchardVersion: 1.0
 Description: BookStore
-Dependencies: Orchard.Projections, Orchard.Forms, Orchard.jQuery
+Dependencies: Orchard.Projections, Orchard.Forms, Orchard.jQuery, AIM.LinqJs, Orchard.Knockout

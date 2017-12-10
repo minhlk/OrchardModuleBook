@@ -7,7 +7,7 @@ namespace MK.BookStore.ViewModel
 {
     public class CartItemViewModel
     {
-        public decimal BookId { get; set; }
+        public int BookId { get; set; }
         public bool IsRemoved { get; set; }
         public int Quantity { get; set; }
     }

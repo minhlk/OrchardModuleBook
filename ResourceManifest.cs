@@ -18,7 +18,7 @@ namespace MK.BookStore {
 
             manifest.DefineStyle("CartWidget").SetUrl("CartWidget.css").SetDependencies("Common");
 
-            manifest.DefineScript("Cart").SetUrl("cart.js").SetDependencies("jQuery");
+            manifest.DefineScript("Cart").SetUrl("cart.js").SetDependencies("jQuery", "jQuery_LinqJs", "ko"); ;
         }
     }
 }

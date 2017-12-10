@@ -20,6 +20,7 @@ namespace MK.BookStore.Services
         int ItemCount();
         void UpdateItems();
         IEnumerable<BookQuantity> GetBooks();
-
+        void Clear();
+        void AddRange(IEnumerable<CartItem> items);
     }
 }

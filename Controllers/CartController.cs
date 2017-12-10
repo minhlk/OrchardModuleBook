@@ -81,5 +81,42 @@ namespace MK.BookStore.Controllers
             // Return to Index if no command was specified
             return RedirectToAction("Index");
         }
+
+
+
+        public ActionResult GetItems()
+        {
+            var products = _cart.GetBooks();
+
+            var json = new
+            {
+                items = (from item in products
+                    select new
+                    {
+                        id = item.BookPart.Id,
+                        title = _services.ContentManager.GetItemMetadata(item.BookPart).DisplayText ?? "(No TitlePart attached)",
+                        unitPrice = item.BookPart.Price,
+                        quantity = item.Quantity
+                    }).ToArray()
+            };
+
+            return Json(json, JsonRequestBehavior.AllowGet);
+        }
+
+        private void UpdateShoppingCart(IEnumerable<CartItemViewModel> items)
+        {
+
+            _cart.Clear();
+
+            if (items == null)
+                return;
+
+            _cart.AddRange(items
+                .Where(item => !item.IsRemoved)
+                .Select(item => new CartItem(item.BookId, item.Quantity < 0 ? 0 : item.Quantity))
+            );
+
+            _cart.UpdateItems();
+        }
     }
 }
