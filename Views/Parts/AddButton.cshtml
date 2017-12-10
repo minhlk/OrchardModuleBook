@@ -1,0 +1,7 @@
+﻿@{
+    var Id = (int)Model.BookId;
+}
+@using (Html.BeginFormAntiForgeryPost(Url.Action("Add", "Cart", new { id = Id, area = "MK.BookStore" })))
+{
+    <button type="submit">@T("Add to shoppingcart")</button>
+}

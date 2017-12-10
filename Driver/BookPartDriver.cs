@@ -25,12 +25,21 @@ namespace MK.BookStore.Driver
         }
         protected override DriverResult Display(BookPart part, string displayType, dynamic shapeHelper)
         {
-            return ContentShape("Parts_Book", () => shapeHelper.Parts_Book(
+            return Combined(ContentShape("Parts_Book", () => shapeHelper.Parts_Book(
                 Price: part.Price,
                 Name: part.Name,
                 Author: part.Author,
                 Genre: part.Genre
-            ));
+            )),
+                ContentShape("Parts_AddButton", () => shapeHelper.Parts_AddButton(
+                BookId: part.Id
+                    
+            ))
+            );
+
+
+
+            ;
         }
     }
 }
