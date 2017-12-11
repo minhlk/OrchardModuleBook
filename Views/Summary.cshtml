@@ -98,7 +98,12 @@ else
     <article>
         <div class="group">
             <div class="align left"><a href="#">Cancel</a></div>
-            <div class="align right"><button type="submit" name="command" value="CreateOrder">Place Order</button></div>
+            <div class="align right">
+                @using (Html.BeginFormAntiForgeryPost(Url.Action("Create", "Order", new { area = "MK.BookStore" })))
+                {
+                    <button type="submit">Place Order</button>
+                }
+            </div>
         </div>
     </article>
 }

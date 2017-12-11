@@ -96,5 +96,36 @@ namespace MK.BookStore {
 
             return 5;
         }
+        public int UpdateFrom5()
+        {
+            SchemaBuilder.CreateTable("OrderRecord", t => t
+                .Column<int>("Id", c => c.PrimaryKey().Identity())
+                .Column<int>("CustomerId", c => c.NotNull())
+                .Column<DateTime>("CreatedAt", c => c.NotNull())
+                .Column<decimal>("SubTotal", c => c.NotNull())
+                .Column<decimal>("Vat", c => c.NotNull())
+                .Column<string>("Status", c => c.WithLength(50).NotNull())
+                .Column<string>("PaymentServiceProviderResponse", c => c.WithLength(null))
+                .Column<string>("PaymentReference", c => c.WithLength(50))
+                .Column<DateTime>("PaidAt", c => c.Nullable())
+                .Column<DateTime>("CompletedAt", c => c.Nullable())
+                .Column<DateTime>("CancelledAt", c => c.Nullable())
+            );
+
+            SchemaBuilder.CreateTable("OrderDetailRecord", t => t
+                .Column<int>("Id", c => c.PrimaryKey().Identity())
+                .Column<int>("OrderRecord_Id", c => c.NotNull())
+                .Column<int>("ProductId", c => c.NotNull())
+                .Column<int>("Quantity", c => c.NotNull())
+                .Column<decimal>("UnitPrice", c => c.NotNull())
+                .Column<decimal>("VatRate", c => c.NotNull())
+            );
+
+//            SchemaBuilder.CreateForeignKey("Order_Customer", "OrderRecord", new[] { "CustomerId" }, "CustomerPartRecord", new[] { "Id" });
+//            SchemaBuilder.CreateForeignKey("OrderDetail_Order", "OrderDetailRecord", new[] { "OrderRecord_Id" }, "OrderRecord", new[] { "Id" });
+//            SchemaBuilder.CreateForeignKey("OrderDetail_Book", "OrderDetailRecord", new[] { "ProductId" }, "BookPartRecord", new[] { "Id" });
+
+            return 6;
+        }
     }
 }
