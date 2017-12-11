@@ -52,3 +52,9 @@ D:\Downloads\mnm\src\Orchard.Web\Modules\MK.BookStore\bin\ImageResizer.xml
 D:\Downloads\mnm\src\Orchard.Web\Modules\MK.BookStore\bin\Orchard.Forms.pdb
 D:\Downloads\mnm\src\Orchard.Web\Modules\MK.BookStore\bin\Orchard.Forms.dll.config
 D:\Downloads\mnm\src\Orchard.Web\Modules\MK.BookStore\obj\Debug\MK.BookStore.csprojResolveAssemblyReference.cache
+D:\Downloads\mnm\src\Orchard.Web\Modules\MK.BookStore\bin\Orchard.Users.dll
+D:\Downloads\mnm\src\Orchard.Web\Modules\MK.BookStore\bin\Orchard.Workflows.dll
+D:\Downloads\mnm\src\Orchard.Web\Modules\MK.BookStore\bin\Orchard.Users.pdb
+D:\Downloads\mnm\src\Orchard.Web\Modules\MK.BookStore\bin\Orchard.Users.dll.config
+D:\Downloads\mnm\src\Orchard.Web\Modules\MK.BookStore\bin\Orchard.Workflows.pdb
+D:\Downloads\mnm\src\Orchard.Web\Modules\MK.BookStore\bin\Orchard.Workflows.dll.config

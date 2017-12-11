@@ -4,6 +4,7 @@
 @{
     Style.Require("Cart");
     Script.Require("Cart");
+//    Script.Require("Linq").AtHead();
     var items = (IList<dynamic>)Model.Books;
     var subtotal = (decimal)Model.Subtotal;
     var vat = (decimal)Model.Vat;
@@ -11,54 +12,55 @@
 }
 @if (!items.Any())
 {
-    <p>You don't have any items in your shopping cart.</p>
+
+    <p>You don't have any items in your shopping cartádasdasda.</p>
     <a class="button" href="#">Continue shopping</a>
 }
 else
 {
-@*    <div data-bind="visible: !hasItems()">*@
-@*        <p>You don't have any items in your shopping cart.</p>*@
-@*        <a class="button" href="#">Continue shopping</a>*@
-@*    </div>*@
+@*<div data-bind="visible: !hasItems()">*@
+@*    <p>You don't have any items in your shopping cart.</p>*@
+@*    <a class="button" href="#">Continue shopping</a>*@
+@*</div>*@
 
-    <div data-bind="visible: hasItems()">
-        <article class="shoppingcart" data-load-shoppingcart-url="@Url.Action("GetItems", "Cart", new { area = "MK.BookStore" })" data-update-shoppingcart-url="@Url.Action("Update", "Cart", new { area = "MK.BookStore" })">
+<div data-bind="visible: hasItems()">
+    <article class="shoppingcart" data-load-shoppingcart-url="@Url.Action("GetItems", "Cart", new { area = "MK.BookStore" })" data-update-shoppingcart-url="@Url.Action("Update", "Cart", new { area = "MK.BookStore" })">
 
-            @using (Html.BeginFormAntiForgeryPost(Url.Action("Update", "Cart", new { area = "MK.BookStore" })))
+        @using (Html.BeginFormAntiForgeryPost(Url.Action("Update", "Cart", new { area = "MK.BookStore" })))
             {
-                <table>
-                    <thead>
-                        <tr>
-                            <td>Article</td>
-                            <td class="numeric">Quantity</td>
-                            <td class="numeric">Price</td>
-                            <td></td>
-                        </tr>
-                    </thead>
-            <tbody data-bind='template: {name: "itemTemplate", foreach: items}'>
-                    @for (var i = 0; i < items.Count; i++) 
+            <table>
+                <thead>
+                    <tr>
+                        <td>Article</td>
+                        <td class="numeric">Quantity</td>
+                        <td class="numeric">Price</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody data-bind='template: {name: "itemTemplate", foreach: items}'>
+                    @for (var i = 0; i < items.Count; i++)
                     {
-                            var item = items[i];
-                            var book = item.BookPart;
-//                            var product = (ProductPart) item.ProductPart;
-                            var title = item.Title ?? "(no routepart attached)";
-                            var quantity = (int) item.Quantity;
-                            var price = book.Price;
-                            var totalPrice = quantity*price;
-                            <tr>
-                                <td>@title</td>
-                                <td class="numeric">@price.ToString("c")</td>
-                                <td class="numeric">
-                                    <input name="@string.Format("items[{0}].BookId", i)" type="hidden" value="@book.Id" />
-                                    <input name="@string.Format("items[{0}].IsRemoved", i)" type="hidden" value="false" />
-                                    <input name="@string.Format("items[{0}].Quantity", i)" type="number" value="@quantity" />
-                                </td>
-                                <td class="numeric">@totalPrice.ToString("c")</td>
-                                <td class="action"><a class="icon delete postback" href="#"></a></td>
-                            </tr>
-                        }
-            </tbody>
-                    <tfoot>
+                        var item = items[i];
+                        var book = item.BookPart;
+                        //                            var product = (ProductPart) item.ProductPart;
+                        var title = item.Title ?? "(no routepart attached)";
+                        var quantity = (int)item.Quantity;
+                        var price = book.Price;
+                        var totalPrice = quantity * price;
+                        <tr>
+                            <td>@title</td>
+                            <td class="numeric">@price.ToString("c")</td>
+                            <td class="numeric">
+                                <input name="@string.Format("items[{0}].BookId", i)" type="hidden" value="@book.Id" />
+                                <input name="@string.Format("items[{0}].IsRemoved", i)" type="hidden" value="false" />
+                                <input name="@string.Format("items[{0}].Quantity", i)" type="number" value="@quantity" />
+                            </td>
+                            <td class="numeric">@totalPrice.ToString("c")</td>
+                            <td class="action"><a class="icon delete postback" href="#"></a></td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
                     <tr><td colspan="5">&nbsp;</td></tr>
                     <tr class="separator">
                         <td class="update" colspan="5"><button name="command" value="Update" type="submit">Update</button></td>
@@ -78,8 +80,8 @@ else
                         <td class="numeric"><span data-bind="text: calculateTotal()">@total.ToString("c")</span></td>
                         <td></td>
                     </tr>
-                    </tfoot>
-                </table>
+                </tfoot>
+            </table>
                 <footer>
                     <div class="group">
                         <div class="align left">
@@ -90,19 +92,19 @@ else
                         </div>
                     </div>
                 </footer>
-            }
-        </article>
-        <script type="text/html" id="itemTemplate">
-            <tr>
-                <td><span data-bind="text: title"></span></td>
-                <td class="numeric"><span data-bind="text: unitPrice"></span></td>
-                <td class="numeric">
-                    <input data-bind="attr: { name: 'items[' + index() + '].ProductId'}, value: id" type="hidden" />
-                    <input data-bind="attr: { name: 'items[' + index() + '].Quantity'}, value: quantity" type="number" />
-                </td>
-                <td class="numeric"><span data-bind="text: total()"></span></td>
-                <td><a class="icon delete" href="#"></a></td>
-            </tr>
-        </script>
-    </div>
+        }
+    </article>
+    <script type="text/html" id="itemTemplate">
+        <tr>
+            <td><span data-bind="text: title"></span></td>
+            <td class="numeric"><span data-bind="text: unitPrice"></span></td>
+            <td class="numeric">
+                <input data-bind="attr: { name: 'items[' + index() + '].ProductId'}, value: id" type="hidden" />
+                <input data-bind="attr: { name: 'items[' + index() + '].Quantity'}, value: quantity" type="number" />
+            </td>
+            <td class="numeric"><span data-bind="text: total()"></span></td>
+            <td><a class="icon delete" href="#"></a></td>
+        </tr>
+    </script>
+</div>
 }

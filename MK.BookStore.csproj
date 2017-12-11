@@ -91,29 +91,48 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CheckoutController.cs" />
+    <Compile Include="Driver\AddressPartDriver.cs" />
     <Compile Include="Driver\BookPartDriver.cs" />
     <Compile Include="Driver\CartWidgetPartDriver.cs" />
+    <Compile Include="Driver\CustomerPartDriver.cs" />
     <Compile Include="Filters\BookPartFilter.cs" />
+    <Compile Include="Handlers\AddressPartHandler.cs" />
     <Compile Include="Handlers\BookPartHandler.cs" />
+    <Compile Include="Handlers\CustomerPartHandler.cs" />
+    <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Migrations.cs" />
+    <Compile Include="Models\AddressPart.cs" />
+    <Compile Include="Models\AddressPartRecord.cs" />
     <Compile Include="Models\BookPart.cs" />
     <Compile Include="Models\BookPartRecord.cs" />
     <Compile Include="Models\BookQuantity.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\CartWidgetPart.cs" />
+    <Compile Include="Models\CustomerPart.cs" />
+    <Compile Include="Models\CustomerPartRecord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceManifest.cs" />
     <Compile Include="Services\Cart.cs" />
+    <Compile Include="Services\CustomerService.cs" />
     <Compile Include="Services\ICart.cs" />
+    <Compile Include="Services\ICustomerService.cs" />
+    <Compile Include="ViewModel\AddressesViewModel.cs" />
+    <Compile Include="ViewModel\AddressViewModel.cs" />
     <Compile Include="ViewModel\CartItemViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\SignupViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets.json" />
     <Content Include="Assets\Styles.less" />
+    <Content Include="Images\bullets.png" />
     <Content Include="Images\sprites.png" />
     <Content Include="Scripts\cart.js" />
+    <Content Include="Scripts\jquerylinq.js" />
     <Content Include="Styles\cart.css" />
     <Content Include="Styles\CartWidget.css" />
+    <Content Include="Styles\checkout-summary.css" />
     <Content Include="Styles\common.css" />
     <Content Include="Styles\Styles.css" />
     <Content Include="Styles\Styles.min.css" />
@@ -141,6 +160,10 @@
       <Project>{5531e894-d259-45a3-aa61-26dbe720c1ce}</Project>
       <Name>Orchard.Projections</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Orchard.Users\Orchard.Users.csproj">
+      <Project>{79AED36E-ABD0-4747-93D3-8722B042454B}</Project>
+      <Name>Orchard.Users</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -155,6 +178,14 @@
     <Content Include="Views\Parts\AddButton.cshtml" />
     <Content Include="Views\Cart.cshtml" />
     <Content Include="Views\Parts\CartWidget.cshtml" />
+    <Content Include="Views\EditorTemplates\Parts\Customer.cshtml" />
+    <Content Include="Views\EditorTemplates\Parts\Address.cshtml" />
+    <Content Include="Views\SignupOrLogin.cshtml" />
+    <Content Include="Views\Signup.cshtml" />
+    <Content Include="Views\Login.cshtml" />
+    <Content Include="Views\SelectAddress.cshtml" />
+    <Content Include="Views\EditorTemplates\Address.cshtml" />
+    <Content Include="Views\Summary.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

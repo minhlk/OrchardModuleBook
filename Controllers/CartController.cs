@@ -13,6 +13,7 @@ using Orchard.Themes;
 
 namespace MK.BookStore.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
         private readonly IOrchardServices _services;
@@ -71,7 +72,7 @@ namespace MK.BookStore.Controllers
             switch (command)
             {
                 case "Checkout":
-                    break;
+                    return RedirectToAction("SignupOrLogin", "Checkout");
                 case "ContinueShopping":
                     break;
                 case "Update":
@@ -118,5 +119,7 @@ namespace MK.BookStore.Controllers
 
             _cart.UpdateItems();
         }
+
+       
     }
 }
