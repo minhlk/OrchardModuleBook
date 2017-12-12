@@ -1,0 +1,54 @@
+﻿@using System.Globalization
+@model IList<MK.BookStore.Models.OrderRecord>
+@{
+    Layout.Title = T("Orders");
+}
+
+<table class="items" summary="@T("This is a table of the orders of the current customer in your application")">
+        <colgroup>
+            <col id="Col1" />
+            <col id="Col2" />
+            <col id="Col3" />
+            <col id="Col4" />
+            <col id="Col5" />
+            <col id="Col6" />
+            <col id="Col7" />
+        </colgroup>
+    <thead>
+    <tr>
+        <th scope="col">&nbsp;&darr;</th>
+        <th scope="col">@T("Number")</th>
+        <th scope="col">@T("Status")</th>
+        <th scope="col">@T("Total")</th>
+        <th scope="col">@T("Created")</th>
+        <th scope="col">@T("Paid")</th>
+        <th scope="col">@T("Actions")</th>
+    </tr>
+    </thead>
+
+        @foreach (var order in Model) {
+            var subTotal = 0m;
+            var vat = 0m;
+
+                foreach (var detail in order.Details)
+                {
+                    //UnitPrice * Quantity
+                    subTotal += detail.UnitPrice * detail.Quantity;
+                    //UnitVat * Quantity
+                    vat += detail.UnitPrice * detail.VatRate * detail.Quantity;
+                }
+        <tr>
+            <td>@order.Id</td>
+            <td>@((order.Id + 1000).ToString(CultureInfo.InvariantCulture))</td>
+            <td>@order.Status</td>
+            <td>@((subTotal + vat).ToString("c"))</td>
+            <td>@order.CreatedAt</td>
+            <td>@order.PaidAt</td>
+            <td>
+                <div>
+                    <a href="@Url.Action("Edit", "OrderAdmin", new {Id = order.Id})" title="@T("Edit")">@T("Edit")</a>
+                </div>
+            </td>
+        </tr>
+        } 
+    </table>

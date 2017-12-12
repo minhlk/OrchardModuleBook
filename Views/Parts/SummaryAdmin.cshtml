@@ -1,0 +1,9 @@
+﻿@{
+    var price = (decimal)Model.Price;
+    var name = (string)Model.Name;
+    var author = (string)Model.Author;
+    var genre = (string)Model.Genre;
+}
+<article>
+    <strong>Price:</strong> @price.ToString("c") | <strong>Author:</strong> @author | <strong>Genre:</strong> @genre
+</article>

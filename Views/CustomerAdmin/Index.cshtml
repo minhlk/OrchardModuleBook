@@ -44,8 +44,7 @@
                 <td>
                     <div>
                         <a href="@Url.Action("Edit", new {customer.Id})" title="@T("Edit")">@T("Edit")</a>@T(" | ")
-                        <a href="@Url.Action("List", "AddressAdmin", new {customerId = customer.Id})" title="@T("Addresses")">@T("Addresses")</a>@T(" | ")
-                        <a href="@Url.Action("Delete", new {customer.Id, returnUrl = Request.Url.PathAndQuery})">@T("Delete")</a>
+                        <a href="@Url.Action("ListAddresses", "CustomerAdmin", new {Id = customer.Id})" title="@T("Addresses")">@T("Addresses")</a>@T(" | ")
                     </div>
                 </td>
             </tr>

@@ -73,5 +73,13 @@ namespace MK.BookStore.Services
         {
             return _orchardServices.ContentManager.Get<CustomerPart>(id);
         }
+        public IEnumerable<AddressPart> GetAddresses(int customerId)
+        {
+            return _orchardServices.ContentManager.Query<AddressPart, AddressPartRecord>().Where(x => x.CustomerId == customerId).List();
+        }
+        public AddressPart GetAddress(int id)
+        {
+            return _orchardServices.ContentManager.Get<AddressPart>(id);
+        }
     }
 }

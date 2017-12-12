@@ -24,12 +24,14 @@ namespace MK.BookStore.Controllers {
         private readonly INotifier _notifier;
         private readonly IContentManager _contentManager;
         private Localizer T { get; set; }
+        private readonly IOrderService _orderService;
 
         public CustomerAdminController(ICustomerService customerService
             , IShapeFactory shapeFactory
             , ISiteService siteService
             , IContentManager contentManager
             , INotifier notifier
+            , IOrderService orderService
 
 
             ) {
@@ -39,6 +41,7 @@ namespace MK.BookStore.Controllers {
             _siteService = siteService;
             _contentManager = contentManager;
             _notifier = notifier;
+            _orderService = orderService;
         }
 
         public ActionResult Index(PagerParameters pagerParameters, CustomersSearchVM search) {
@@ -112,6 +115,18 @@ namespace MK.BookStore.Controllers {
         void IUpdateModel.AddModelError(string key, LocalizedString errorMessage)
         {
             ModelState.AddModelError(key, errorMessage.Text);
+        }
+
+        public ActionResult ListAddresses(int id)
+        {
+            var addresses = _customerService.GetAddresses(id).ToArray();
+            return View(addresses);
+        }
+
+        public ActionResult ListOrders(int id)
+        {
+            var orders = _orderService.GetOrders(id).ToArray();
+            return View(orders);
         }
     }
 }

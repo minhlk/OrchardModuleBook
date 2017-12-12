@@ -40,12 +40,15 @@ namespace MK.BookStore.Controllers
             var pagerShape = Shape.Pager(pager).TotalItemCount(ordersQuery.Count());
             var model = Shape.Orders(Orders: orders.ToArray(), Pager: pagerShape);
             return View((object)model);
+//            var orders = _orderService.GetOrders().ToArray();
+//            return View(orders);
         }
 
         public ActionResult Edit(int id) {
             var order = _orderService.GetOrder(id);
             var model = BuildModel(order, new EditOrderVM(order));
             return View((object)model);
+            
         }
 
         [HttpPost]

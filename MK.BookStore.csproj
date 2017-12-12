@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminMenu.cs" />
+    <Compile Include="Controllers\AddressAdminController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\CustomerAdminController.cs" />
@@ -214,6 +215,12 @@
     <Content Include="Styles\menu.webshop-admin" />
     <Content Include="Views\CustomerAdmin\Index.cshtml" />
     <Content Include="Views\CustomerAdmin\Edit.cshtml" />
+    <Content Include="Views\Parts\SummaryAdmin.cshtml" />
+    <Content Include="Views\CustomerAdmin\ListAddresses.cshtml" />
+    <Content Include="Views\CustomerAdmin\ListOrders.cshtml" />
+    <Content Include="Views\AddressAdmin\Edit.cshtml" />
+    <Content Include="Views\OrderAdmin\Edit.cshtml" />
+    <Content Include="Views\OrderAdmin\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

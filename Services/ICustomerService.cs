@@ -16,5 +16,8 @@ namespace MK.BookStore.Services
         AddressPart CreateAddress(int customerId, string addressType);
         IContentQuery<CustomerPart> GetCustomers();
         CustomerPart GetCustomer(int id);
+        IEnumerable<AddressPart> GetAddresses(int customerId);
+
+        AddressPart GetAddress(int id);
     }
 }

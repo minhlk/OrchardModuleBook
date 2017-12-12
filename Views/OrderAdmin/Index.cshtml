@@ -1,0 +1,65 @@
+﻿@using System.Globalization
+@using MK.BookStore.Models
+@using Orchard.UI.Navigation
+@{
+    var orders = (IList<OrderRecord>) Model.Orders;
+    Layout.Title = T("Orders");
+    Style.Require("Common");
+}
+
+<table class="items" summary="@T("This is a table of the orders of the current customer in your application")">
+    <colgroup>
+        <col id="Col1" />
+        <col id="Col2" />
+        <col id="Col3" />
+        <col id="Col4" />
+        <col id="Col5" />
+        <col id="Col6" />
+        <col id="Col7" />
+    </colgroup>
+    <thead>
+    <tr>
+        <th scope="col">&nbsp;&darr;</th>
+        <th scope="col">@T("Number")</th>
+        <th scope="col">@T("Status")</th>
+        <th scope="col">@T("Total")</th>
+        <th scope="col">@T("Created")</th>
+        <th scope="col">@T("Paid")</th>
+        <th scope="col">@T("Actions")</th>
+    </tr>
+    </thead>
+
+    @foreach (var order in orders) {
+        var subTotal = 0m;
+        var vat = 0m;
+
+        foreach (var detail in order.Details)
+        {
+            //UnitPrice * Quantity
+            subTotal += detail.UnitPrice * detail.Quantity;
+            //UnitVat * Quantity
+            vat += detail.UnitPrice * detail.VatRate * detail.Quantity;
+        }
+        <tr>
+            <td>@order.Id</td>
+            <td>@((order.Id + 1000).ToString(CultureInfo.InvariantCulture))</td>
+            <td>@order.Status</td>
+            <td>@((subTotal + vat).ToString("c"))</td>
+            <td>@order.CreatedAt</td>
+            <td>@order.PaidAt</td>
+            <td>
+                <div>
+                    <a href="@Url.Action("Edit", "OrderAdmin", new {Id = order.Id})" title="@T("Edit")">@T("Edit")</a>
+                </div>
+            </td>
+        </tr>
+    }
+    <ul class="pagination">
+        @if (Model.Pager.Page > 1)
+        {
+            <li><a href="@Url.Action("Index", "OrderAdmin", new {Page = Model.Pager.Page - 1})">@(Model.Pager.Page - 1)</a></li>
+        }
+        <li><a href="" class="active">@(Model.Pager.Page)</a></li>
+        <li><a href="@Url.Action("Index", "OrderAdmin", new {Page = Model.Pager.Page + 1})">@(Model.Pager.Page + 1)</a></li>
+    </ul> 
+</table>

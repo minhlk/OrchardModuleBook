@@ -5,4 +5,12 @@
     <Place Parts_AddButton="Content:after" />
     <Place Parts_Customer_Edit="Content:0" />
     <Place Parts_Address_Edit="Content:0" />
+    <Match DisplayType="SummaryAdmin">
+      <Place Parts_AddButton="-" />
+    </Match>
+  <Match DisplayType="SummaryAdmin">
+    <Place Parts_AddButton="-" />
+    <Place Parts_Book="-" />
+    <Place Parts_SummaryAdmin="Content:0" />
+  </Match>
 </Placement>
