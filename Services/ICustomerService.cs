@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MK.BookStore.Models;
 using Orchard;
+using Orchard.ContentManagement;
 
 namespace MK.BookStore.Services
 {
@@ -13,5 +14,7 @@ namespace MK.BookStore.Services
         CustomerPart CreateCustomer(string email, string password);
         AddressPart GetAddress(int customerId, string addressType);
         AddressPart CreateAddress(int customerId, string addressType);
+        IContentQuery<CustomerPart> GetCustomers();
+        CustomerPart GetCustomer(int id);
     }
 }

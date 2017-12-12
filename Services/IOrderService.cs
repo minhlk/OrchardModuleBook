@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using MK.BookStore.Extensibility;
 using MK.BookStore.Models;
 using Orchard;
 
@@ -18,5 +19,11 @@ namespace MK.BookStore.Services
         /// Gets a list of ProductParts from the specified list of OrderDetails. Useful if you need to use the product as a ProductPart (instead of just having access to the ProductRecord instance).
         /// </summary>
         IEnumerable<BookPart> GetProducts(IEnumerable<OrderDetailRecord> orderDetails);
+        OrderRecord GetOrderByNumber(string orderNumber);
+        void UpdateOrderStatus(OrderRecord order, PaymentResponse paymentResponse);
+
+        IEnumerable<OrderRecord> GetOrders(int customerId);
+        IQueryable<OrderRecord> GetOrders();
+        OrderRecord GetOrder(int id);
     }
 }

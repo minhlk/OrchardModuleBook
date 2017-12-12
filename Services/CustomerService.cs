@@ -65,5 +65,13 @@ namespace MK.BookStore.Services
                 x.CustomerId = customerId;
             });
         }
+        public IContentQuery<CustomerPart> GetCustomers()
+        {
+            return _orchardServices.ContentManager.Query<CustomerPart, CustomerPartRecord>();
+        }
+        public CustomerPart GetCustomer(int id)
+        {
+            return _orchardServices.ContentManager.Get<CustomerPart>(id);
+        }
     }
 }

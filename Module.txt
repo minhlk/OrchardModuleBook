@@ -6,3 +6,7 @@ Version: 1.0
 OrchardVersion: 1.0
 Description: BookStore
 Dependencies: Orchard.Projections, Orchard.Forms, Orchard.jQuery, AIM.LinqJs, Orchard.Knockout, Orchard.Users
+Features: 
+	MK.BookStore.SimulatedPSP
+		Name: Simulated Payment Service Provider
+		Description: Provides a simulated Payment Service Provider for testing purposes only.

@@ -90,13 +90,21 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminMenu.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
+    <Compile Include="Controllers\CustomerAdminController.cs" />
+    <Compile Include="Controllers\OrderAdminController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\SimulatedPaymentServiceProviderController.cs" />
     <Compile Include="Driver\AddressPartDriver.cs" />
     <Compile Include="Driver\BookPartDriver.cs" />
     <Compile Include="Driver\CartWidgetPartDriver.cs" />
     <Compile Include="Driver\CustomerPartDriver.cs" />
+    <Compile Include="Extensibility\IPaymentServiceProvider.cs" />
+    <Compile Include="Extensibility\PaymentRequestEventArgs.cs" />
+    <Compile Include="Extensibility\PaymentResponse.cs" />
+    <Compile Include="Extensibility\PaymentResponseStatus.cs" />
     <Compile Include="Filters\BookPartFilter.cs" />
     <Compile Include="Handlers\AddressPartHandler.cs" />
     <Compile Include="Handlers\BookPartHandler.cs" />
@@ -125,9 +133,13 @@
     <Compile Include="Services\IDateTimeService.cs" />
     <Compile Include="Services\IOrderService.cs" />
     <Compile Include="Services\OrderService.cs" />
+    <Compile Include="Services\SimulatedPaymentServiceProvider.cs" />
     <Compile Include="ViewModel\AddressesViewModel.cs" />
     <Compile Include="ViewModel\AddressViewModel.cs" />
     <Compile Include="ViewModel\CartItemViewModel.cs" />
+    <Compile Include="ViewModel\CustomersIndexVM.cs" />
+    <Compile Include="ViewModel\CustomersSearchVM.cs" />
+    <Compile Include="ViewModel\EditOrderVM.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\SignupViewModel.cs" />
   </ItemGroup>
@@ -135,6 +147,7 @@
     <Content Include="Assets.json" />
     <Content Include="Assets\Styles.less" />
     <Content Include="Images\bullets.png" />
+    <Content Include="Images\menu.webshop.png" />
     <Content Include="Images\sprites.png" />
     <Content Include="Scripts\cart.js" />
     <Content Include="Styles\cart.css" />
@@ -142,6 +155,7 @@
     <Content Include="Styles\checkout-summary.css" />
     <Content Include="Styles\common.css" />
     <Content Include="Styles\order.css" />
+    <Content Include="Styles\simulated-psp.css" />
     <Content Include="Styles\Styles.css" />
     <Content Include="Styles\Styles.min.css" />
     <Content Include="Web.config" />
@@ -195,6 +209,11 @@
     <Content Include="Views\EditorTemplates\Address.cshtml" />
     <Content Include="Views\Summary.cshtml" />
     <Content Include="Views\Create.cshtml" />
+    <Content Include="Views\SimulatedPaymentServiceProvider\Index.cshtml" />
+    <Content Include="Views\PaymentResponse.cshtml" />
+    <Content Include="Styles\menu.webshop-admin" />
+    <Content Include="Views\CustomerAdmin\Index.cshtml" />
+    <Content Include="Views\CustomerAdmin\Edit.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

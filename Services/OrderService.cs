@@ -4,6 +4,7 @@ using Orchard.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MK.BookStore.Extensibility;
 
 namespace MK.BookStore.Services
 {
@@ -79,6 +80,62 @@ namespace MK.BookStore.Services
         {
             var productIds = orderDetails.Select(x => x.ProductId).ToArray();
             return _contentManager.GetMany<BookPart>(productIds, VersionOptions.Latest, QueryHints.Empty);
+        }
+
+
+        public OrderRecord GetOrderByNumber(string orderNumber)
+        {
+            var orderId = int.Parse(orderNumber) - 1000;
+            return _orderRepository.Get(orderId);
+        }
+
+        public void UpdateOrderStatus(OrderRecord order, PaymentResponse paymentResponse)
+        {
+            OrderStatus orderStatus;
+
+            switch (paymentResponse.Status)
+            {
+                case PaymentResponseStatus.Success:
+                    orderStatus = OrderStatus.Paid;
+                    break;
+                default:
+                    orderStatus = OrderStatus.Cancelled;
+                    break;
+            }
+
+            if (order.Status == orderStatus)
+                return;
+
+            order.Status = orderStatus;
+            order.PaymentServiceProviderResponse = paymentResponse.ResponseText;
+            order.PaymentReference = paymentResponse.PaymentReference;
+
+            switch (order.Status)
+            {
+                case OrderStatus.Paid:
+                    order.PaidAt = _dateTimeService.Now;
+                    break;
+                case OrderStatus.Completed:
+                    order.CompletedAt = _dateTimeService.Now;
+                    break;
+                case OrderStatus.Cancelled:
+                    order.CancelledAt = _dateTimeService.Now;
+                    break;
+            }
+        }
+        public IEnumerable<OrderRecord> GetOrders(int customerId)
+        {
+            return _orderRepository.Fetch(x => x.CustomerId == customerId);
+        }
+
+        public IQueryable<OrderRecord> GetOrders()
+        {
+            return _orderRepository.Table;
+        }
+
+        public OrderRecord GetOrder(int id)
+        {
+            return _orderRepository.Get(id);
         }
     }
 }

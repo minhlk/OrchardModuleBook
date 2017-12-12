@@ -21,6 +21,10 @@ namespace MK.BookStore.Driver
         protected override DriverResult Editor(CustomerPart part, IUpdateModel updater, dynamic shapeHelper)
         {
             updater.TryUpdateModel(part, Prefix, null, null);
+
+            var user = part.User;
+            updater.TryUpdateModel(user, Prefix, new[] { "Email" }, null);
+
             return Editor(part, shapeHelper);
         }
     }

@@ -24,6 +24,8 @@ namespace MK.BookStore {
             manifest.DefineStyle("Summary").SetUrl("checkout-summary.css").SetDependencies("Common");
 
             manifest.DefineStyle("Order").SetUrl("order.css").SetDependencies("Webshop.Common");
+
+            manifest.DefineStyle("SimulatedPSP").SetUrl("simulated-psp.css").SetDependencies("Common");
         }
     }
 }

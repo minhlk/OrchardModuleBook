@@ -1,6 +1,7 @@
 ﻿@using System.Globalization
 @using MK.BookStore.Models
 @using Orchard.ContentManagement
+@using Orchard.Core.Title.Models
 @{
     Style.Require("Order");
 
@@ -9,8 +10,7 @@
     var invoiceAddress = Model.InvoiceAddress;
     var shippingAddress = Model.ShippingAddress;
 }
-@*<h2>@T("Order {0} has been created", order.Number)</h2>*@
-<h2>@T("Order has been created")</h2>
+<h2>@T("Order {0} has been created", order.Id + 1000)</h2>
 <p>@T("Please find your order details below")</p>
 
 <div class="order-wrapper">
@@ -19,11 +19,11 @@
             <ul>
                 <li>
                     <div class="field-label">Order Number</div>
-@*                    <div class="field-value">@order.Number</div>*@
+                    <div class="field-value">@((order.Id + 1000).ToString(CultureInfo.InvariantCulture))</div>
                 </li>
                 <li>
                     <div class="field-label">Created</div>
-@*                    <div class="field-value">@order.CreatedAt.ToString(CultureInfo.InvariantCulture)</div>*@
+                    <div class="field-value">@order.CreatedAt.ToString(CultureInfo.InvariantCulture)</div>
                 </li>
             </ul>
         </header>
@@ -37,31 +37,46 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var detail in order.Details)
-                {
-                    var productPart = productParts.Single(x => x.Id == detail.ProductId);
-//                    var routePart = productPart.As<BookPart>();
-                    <tr>
-                        <td class="numeric">@detail.UnitPrice.ToString("c")</td>
-                        <td class="numeric">@detail.Quantity</td>
-@*                        <td class="numeric">@detail.SubTotal.ToString("c")</td>*@
-                    </tr>
-                }
+            @foreach (var detail in order.Details)
+            {
+                var productPart = productParts.Single(x => x.Id == detail.ProductId);
+                var routePart = productPart.As<TitlePart>();
+                var productTitle = routePart != null ? routePart.Title : "(No RoutePart attached)";
+                <tr>
+                    <td>@productTitle</td>
+                    <td class="numeric">@detail.UnitPrice.ToString("c")</td>
+                    <td class="numeric">@detail.Quantity</td>
+                    <td class="numeric">@((detail.UnitPrice * detail.Quantity ).ToString("c"))</td>
+                </tr>
+            }
             </tbody>
+            @{
+                var subTotal = 0m;
+                var vat = 0m;
+
+                foreach (var detail in order.Details)
+                {
+                    //UnitPrice * Quantity
+                    subTotal += detail.UnitPrice * detail.Quantity;
+                    //UnitVat * Quantity
+                    vat += detail.UnitPrice * detail.VatRate * detail.Quantity;
+                }
+                
+            }
             <tfoot>
                 <tr class="separator"><td colspan="4">&nbsp;</td></tr>
                 <tr>
                     <td class="numeric label" colspan="2">Subtotal:</td>
-                    <td class="numeric">@order.SubTotal.ToString("c")</td>
+                    <td class="numeric">@subTotal.ToString("c")</td>
                 </tr>
                 <tr>
                     <td class="numeric label" colspan="2">VAT:</td>
-                    <td class="numeric">@order.Vat.ToString("c")</td>
+                    <td class="numeric">@vat.ToString("c")</td>
                 </tr>
-@*                <tr>*@
-@*                    <td class="numeric label" colspan="2">Total:</td>*@
-@*                    <td class="numeric">@order.Total.ToString("c")</td>*@
-@*                </tr>*@
+                <tr>
+                    <td class="numeric label" colspan="2">Total:</td>
+                    <td class="numeric">@((subTotal + vat).ToString("c"))</td>
+                </tr>
             </tfoot>
         </table>
     </article>

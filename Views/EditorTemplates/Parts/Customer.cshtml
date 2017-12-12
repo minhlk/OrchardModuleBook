@@ -1,4 +1,7 @@
 ﻿@model MK.BookStore.Models.CustomerPart
+@{
+    var user = Model.User;
+}
 <fieldset>
     <div class="editor-label">@Html.LabelFor(x => x.Title)</div>
     <div class="editor-field">@Html.EditorFor(x => x.Title)</div>
@@ -13,5 +16,10 @@
     <div class="editor-field">
         @Html.EditorFor(x => x.LastName)
         @Html.ValidationMessageFor(x => x.LastName)
+    </div>
+    <div class="editor-label">@Html.LabelFor(x => user.Email)</div>
+    <div class="editor-field">
+        @Html.TextBoxFor(x => user.Email, new { @class = "large text" })
+        @Html.ValidationMessageFor(x => user.Email)
     </div>
 </fieldset>
