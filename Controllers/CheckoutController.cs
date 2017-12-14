@@ -68,7 +68,7 @@ namespace MK.BookStore.Controllers
             customer.LastName = signup.LastName;
             customer.Title = signup.Title;
 
-//            _authenticationService.SignIn(customer.User, true);
+            _authenticationService.SignIn(customer.User, true); 
 
             return RedirectToAction("SelectAddress");
         }
@@ -104,7 +104,7 @@ namespace MK.BookStore.Controllers
             _authenticationService.SignIn(user, login.CreatePersistentCookie);
 
             // Redirect to the next step
-            return RedirectToAction("SelectAddress");
+            return RedirectToAction("Logon","Account");
         }
 
         [Themed]

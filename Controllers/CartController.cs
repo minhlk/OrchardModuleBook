@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MK.BookStore.Helpers;
 using MK.BookStore.Models;
 using MK.BookStore.Services;
 using MK.BookStore.ViewModel;
@@ -13,7 +14,7 @@ using Orchard.Themes;
 
 namespace MK.BookStore.Controllers
 {
-    [Authorize]
+    [UnauthorizeAtrribute]
     public class CartController : Controller
     {
         private readonly IOrchardServices _services;

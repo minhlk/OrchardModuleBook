@@ -111,6 +111,7 @@
     <Compile Include="Handlers\BookPartHandler.cs" />
     <Compile Include="Handlers\CustomerPartHandler.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
+    <Compile Include="Helpers\UnauthorizeAtrribute.cs" />
     <Compile Include="Migrations.cs" />
     <Compile Include="Models\AddressPart.cs" />
     <Compile Include="Models\AddressPartRecord.cs" />
